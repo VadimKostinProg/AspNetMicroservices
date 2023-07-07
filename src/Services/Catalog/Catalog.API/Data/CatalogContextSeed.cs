@@ -11,7 +11,7 @@ namespace Catalog.API.Data
 
             if (!collectionExists)
             {
-                products.InsertManyAsync(GetPreconfiguredProducts())
+                products.InsertManyAsync(GetPreconfiguredProducts());
             }
         }
 
