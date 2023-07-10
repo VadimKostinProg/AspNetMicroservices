@@ -59,7 +59,7 @@ namespace Catalog.API.Controllers
         {
             await _productRepository.Create(product);
 
-            return CreatedAtRoute("GetProduct", new { id = product.Id }, product);
+            return Ok(product);
         }
 
         [HttpPut]
