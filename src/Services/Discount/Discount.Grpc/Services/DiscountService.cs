@@ -38,12 +38,13 @@ namespace Discount.Grpc.Services
         {
             var coupon = _mapper.Map<Coupon>(request.Coupon);
 
-            bool result = await _discountRepository.CreateDiscount(coupon);
+            var isCreated = await _discountRepository.CreateDiscount(coupon);
 
-            if (!result)
+            if (!isCreated)
             {
-                _logger.LogError($"Creating the discount of product {coupon.ProductName} failed.");
-                throw new RpcException(new Status(StatusCode.InvalidArgument, $"Cannot create discount for product {coupon.ProductName}."));
+                string message = $"Failure of creating thr discount with ProductName={request.Coupon.ProductName}, Amount={request.Coupon.Amount}.";
+                _logger.LogError(message);
+                throw new RpcException(new Status(StatusCode.InvalidArgument, message));
             }
 
             _logger.LogInformation($"Discount is successfuly created for product {coupon.ProductName}");
@@ -56,12 +57,13 @@ namespace Discount.Grpc.Services
         {
             var coupon = _mapper.Map<Coupon>(request.Coupon);
 
-            bool result = await _discountRepository.UpdateDiscount(coupon);
+            var isUpdated = await _discountRepository.UpdateDiscount(coupon);
 
-            if (!result)
+            if (!isUpdated)
             {
-                _logger.LogError($"Updating the discount of product {coupon.ProductName} failed.");
-                throw new RpcException(new Status(StatusCode.InvalidArgument, $"Cannot update discount for product {coupon.ProductName}."));
+                string message = $"Failure of updating thr discount with ProductName={request.Coupon.ProductName}, Amount={request.Coupon.Amount}.";
+                _logger.LogError(message);
+                throw new RpcException(new Status(StatusCode.InvalidArgument, message));
             }
 
             _logger.LogInformation($"Discount is successfuly updated for product {coupon.ProductName}");
@@ -72,9 +74,9 @@ namespace Discount.Grpc.Services
 
         public override async Task<DeleteDiscountResponse> DeleteDiscount(DeleteDiscountRequest request, ServerCallContext context)
         {
-            bool deleted = await _discountRepository.DeleteDiscount(request.ProductName);
+            var isDeleted = await _discountRepository.DeleteDiscount(request.ProductName);
 
-            var response = new DeleteDiscountResponse() { Success = deleted };
+            var response = new DeleteDiscountResponse() { Success = isDeleted };
 
             return response;
         }
