@@ -56,9 +56,9 @@ namespace Ordering.Application.Contracts.Persistence
         /// <summary>
         /// Method for reading entity from the data source by it`s Id.
         /// </summary>
-        /// <param name="id">Guid of entity to read.</param>
-        /// <returns>Entity with passed guid, null - if entity is not found.</returns>
-        Task<T?> GetByIdAsync(Guid id);
+        /// <param name="id">Id of entity to read.</param>
+        /// <returns>Entity with passed id, null - if entity is not found.</returns>
+        Task<T?> GetByIdAsync(int id);
 
         /// <summary>
         /// Method for adding new entity to the data source.
@@ -77,8 +77,8 @@ namespace Ordering.Application.Contracts.Persistence
         /// <summary>
         /// Method for deleting the entity from the data source.
         /// </summary>
-        /// <param name="id">Guid of entity to delete.</param>
+        /// <param name="id">Id of entity to delete.</param>
         /// <returns>True - if entity is successfully deleted, otherwise - false.</returns>
-        Task<bool> DeleteAsync(Guid id);
+        Task<bool> DeleteAsync(int id);
     }
 }
