@@ -71,14 +71,12 @@ namespace Ordering.Application.Contracts.Persistence
         /// Method for updating the entity in the data source.
         /// </summary>
         /// <param name="entity">Entity to update.</param>
-        /// <returns>True - if entity is successfully updated, otherwise - false.</returns>
-        Task<bool> UpdateAsync(T entity);
+         Task UpdateAsync(T entity);
 
         /// <summary>
         /// Method for deleting the entity from the data source.
         /// </summary>
         /// <param name="id">Id of entity to delete.</param>
-        /// <returns>True - if entity is successfully deleted, otherwise - false.</returns>
-        Task<bool> DeleteAsync(int id);
+        Task DeleteAsync(int id);
     }
 }
