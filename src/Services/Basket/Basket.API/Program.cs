@@ -24,9 +24,9 @@ builder.Services.AddScoped<DiscountGrpcService>();
 
 builder.Services.AddMassTransit(config =>
 {
-    config.UsingRabbitMq((context, config) =>
+    config.UsingRabbitMq((context, configuration) =>
     {
-        config.Host(builder.Configuration.GetValue<string>("EventBusSettings:HostAddress"));
+        configuration.Host(builder.Configuration.GetValue<string>("EventBusSettings:HostAddress"));
     });
 });
 
