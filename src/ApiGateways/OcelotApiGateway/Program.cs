@@ -1,3 +1,4 @@
+using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
@@ -8,7 +9,8 @@ builder.Logging.AddDebug();
 
 builder.Configuration.AddJsonFile($"ocelot.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
-builder.Services.AddOcelot();
+builder.Services.AddOcelot()
+                .AddCacheManager(settings => settings.WithDictionaryHandle());
 
 var app = builder.Build();
 

@@ -15,7 +15,7 @@
             get
             {
                 decimal total = this.Items
-                    .Select(item => item.Price * item.Qunatity)
+                    .Select(item => item.Price * item.Quantity)
                     .Sum();
                 return total;
             }
