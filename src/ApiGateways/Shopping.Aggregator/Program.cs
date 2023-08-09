@@ -1,3 +1,4 @@
+using Shopping.Aggregator.Middlewares;
 using Shopping.Aggregator.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +22,7 @@ builder.Services.AddHttpClient<IBasketService, BasketService>(client =>
 
 builder.Services.AddHttpClient<IOrderService, OrderService>(client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:OrderUrl"]);
+    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:OrderingUrl"]);
 });
 
 var app = builder.Build();
@@ -36,5 +37,7 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<ExceptionHandler>();
 
 app.Run();
